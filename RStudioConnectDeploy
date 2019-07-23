@@ -3,7 +3,10 @@ pipeline{
   stages{
     stage("Build"){
       steps{
-        echo "Hello"
+        echo "${WORKSPACE}"
+        sh '''#!/bin/bash
+          tar czf bundel.tar.gz manifest.json testmarkdown.Rmd
+        '''
       }
     }
   }
