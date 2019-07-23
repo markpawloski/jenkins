@@ -1,11 +1,19 @@
 pipeline{
   agent any
+  environment{
+        def CONNECT_SERVER = "http://dummy.restapiexample.com/api/v1"
+        def CONNECT_API_KEY = "abc123def456"
+        def CONTENT_NAME = "Test1"
+        def CONTENT_TITLE = "Test1 Title"
+        def DATA = /'{"name":"${CONTENT_NAME}","title":"${CONTENT_TITLE}"}'/
+  }
   stages{
     stage("Build"){
       steps{
         echo "${WORKSPACE}"
+        echo "${CONNECT_SERVER}"
         sh '''#!/bin/bash
-          tar czf bundel.tar.gz manifest.json testmarkdown.Rmd
+          tar czf bundle.tar.gz manifest.json testmarkdown.Rmd
         '''
       }
     }
