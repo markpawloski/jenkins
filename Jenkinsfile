@@ -3,7 +3,7 @@ pipeline{
   stages{
     stage("Build"){
       steps{
-        scm checkout
+        echo "Hello"
       }
     }
   }
