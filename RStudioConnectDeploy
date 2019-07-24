@@ -36,5 +36,15 @@ pipeline{
         '''
       }
     }
+    stage("Upload"){
+      steps{
+        sh '''#!/bin/bash
+          #url=$CONNECT_SERVER/employee/40688
+          #ret=$(curl $url)
+          #guid=$(<<< $ret awk -F '"' '$2=="id"{printf("%s", $4)}')
+          echo $guid
+        '''
+      }
+    }
   }
 }
