@@ -17,9 +17,11 @@ pipeline{
         echo "${WORKSPACE}"
         echo "${CONNECT_SERVER}"
         echo "${DATA}"
-        sh '''#!/bin/bash
-          tar czf "${BUNDLE_FILENAME}" "${BUNDLE_FILES}"
-        '''
+        echo "${BUNDLE_FILENAME}"
+        echo "${BUNDLE_FILES}"
+        //sh '''#!/bin/bash
+        //  tar czf "${BUNDLE_FILENAME}" "${BUNDLE_FILES}"
+        //'''
       }
     }
   }
