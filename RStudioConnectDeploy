@@ -6,23 +6,33 @@ pipeline{
         def CONNECT_API_KEY = "abc123def456"
         def CONTENT_NAME = "Test1"
         def CONTENT_TITLE = "Test1 Title"
-        def BUNDLE_FILENAME = "bundle.tar.gz"
-        def BUNDLE_FILES = "manifest.json testmarkdown.Rmd"
+        //def BUNDLE_FILENAME = "bundle.tar.gz"
+        //def BUNDLE_FILES = "manifest.json testmarkdown.Rmd"
         //this prepares JSON DATA for submission to RStudio Connect API
         def DATA = /'{"name":"${CONTENT_NAME}","title":"${CONTENT_TITLE}"}'/
         //def TAR_PARAMS = "czf bundle.tar.gz --files-from=${BUNDLE_FILES}"
   }
   stages{
-    stage("Build"){
+    stage("Build Bundle"){
       steps{
         echo "${WORKSPACE}"
         echo "${CONNECT_SERVER}"
         echo "${DATA}"
-        echo "${BUNDLE_FILENAME}"
-        echo "${BUNDLE_FILES}"
+        //echo "${BUNDLE_FILENAME}"
+        //echo "${BUNDLE_FILES}"
         //echo "${TAR_PARAMS}"
         sh '''#!/bin/bash
           tar czf bundle.tar.gz manifest.json testmarkdown.Rmd
+        '''
+      }
+    }
+    stage("Create Content Stub"){
+      steps{
+        sh '''#!/bin/bash
+          url=$CONNECT_SERVER/employees
+          ret=$(curl $url)
+          guid=$(<<< $ret awk -F '"' '$2=="id"{printf("%s", $4)}')
+          echo $guid
         '''
       }
     }
