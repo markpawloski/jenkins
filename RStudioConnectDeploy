@@ -22,7 +22,7 @@ pipeline{
         echo "${BUNDLE_FILES}"
         //echo "${TAR_PARAMS}"
         sh '''#!/bin/bash
-          tar czf bundle.tar.gz "$BUNDLE_FILES"
+          tar czf bundle.tar.gz manifest.json testmarkdown.Rmd
         '''
       }
     }
