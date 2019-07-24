@@ -29,7 +29,7 @@ pipeline{
     stage("Create Content Stub"){
       steps{
         sh '''#!/bin/bash
-          url=$CONNECT_SERVER/employees
+          url=$CONNECT_SERVER/employees/40688
           ret=$(curl $url)
           guid=$(<<< $ret awk -F '"' '$2=="id"{printf("%s", $4)}')
           echo $guid
