@@ -2,6 +2,7 @@ pipeline{
   agent any
   environment{
         //These variables are needed for the script to run successfully
+        //def CONNECT_SERVER = "https://rstudioconnect-dev.bcbsfl.com/__api__/v1"
         def CONNECT_SERVER = "http://dummy.restapiexample.com/api/v1"
         def CONNECT_API_KEY = "abc123def456"
         def CONTENT_NAME = "Test1"
@@ -26,22 +27,25 @@ pipeline{
         '''
       }
     }
-    stage("Create Content Stub"){
+    stage("Create RConnect Content"){
       steps{
         sh '''#!/bin/bash
+          //retguid=$(curl --silent --show-error -L --max-redirs 0 --fail -X POST -H "Authorization: Key $CONNECT_API_KEY" --data "$DATA" "$CONNECT_SERVER/experimental/content")
+          //guid=$(<<< $retguid awk -F '"' '$2=="guid"{printf("%s", $4)}')
+          //echo $guid
+
+          //retbundle=$(curl --silent --show-error -L --max-redirs 0 --fail -X POST -H "Authorization: Key $CONNECT_API_KEY" --data-binary @"bundle.tar.gz "$CONNECT_SERVER/experimental/content/$guid/upload")
+          //bundleid=$(<<< $retbundle awk -F '"' '$2=="bundle_id"{printf("%s", $4)}')
+          //echo $bundleid
+          
+          //rettask=$(curl --silent --show-error -L --max-redirs 0 --fail -X POST -H "Authorization: Key $CONNECT_API_KEY" --data "$guid" "$CONNECT_SERVER/experimental/content/$guid/deploy")
+          //taskid=$(<<< $rettask awk -F '"' '$2=="task_id"{printf("%s", $4)}')
+          //echo $taskid
+
+
           url=$CONNECT_SERVER/employee/40688
           ret=$(curl $url)
           guid=$(<<< $ret awk -F '"' '$2=="id"{printf("%s", $4)}')
-          echo $guid
-        '''
-      }
-    }
-    stage("Upload"){
-      steps{
-        sh '''#!/bin/bash
-          #url=$CONNECT_SERVER/employee/40688
-          #ret=$(curl $url)
-          #guid=$(<<< $ret awk -F '"' '$2=="id"{printf("%s", $4)}')
           echo $guid
         '''
       }
