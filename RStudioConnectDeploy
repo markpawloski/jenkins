@@ -2,7 +2,7 @@ pipeline{
   agent any
   environment{
         //These variables are needed for the script to run successfully
-        def CONNECT_SERVER = "http://dummy.restapiexample.com/api/v1
+        def CONNECT_SERVER = "http://dummy.restapiexample.com/api/v1"
         def CONNECT_API_KEY = "abc123def456"
         def CONTENT_NAME = "Test1"
         def CONTENT_TITLE = "Test1 Title"
