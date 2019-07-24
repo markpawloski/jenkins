@@ -1,10 +1,14 @@
 pipeline{
   agent any
   environment{
-        def CONNECT_SERVER = "http://dummy.restapiexample.com/api/v1"
+        //These variables are needed for the script to run successfully
+        def CONNECT_SERVER = "http://dummy.restapiexample.com/api/v1
         def CONNECT_API_KEY = "abc123def456"
         def CONTENT_NAME = "Test1"
         def CONTENT_TITLE = "Test1 Title"
+        def BUNDLE_FILENAME = "bundel.tar.gz"
+        def BUNDLE_FILES = "manifest.json testmarkdown.Rmd"
+        //this prepares JSON DATA for submission to RStudio Connect API
         def DATA = /'{"name":"${CONTENT_NAME}","title":"${CONTENT_TITLE}"}'/
   }
   stages{
@@ -12,8 +16,9 @@ pipeline{
       steps{
         echo "${WORKSPACE}"
         echo "${CONNECT_SERVER}"
+        echo "${DATA}"
         sh '''#!/bin/bash
-          tar czf bundle.tar.gz manifest.json testmarkdown.Rmd
+          tar czf "${BUNDLE_FILENAME}" "${BUNDLE_FILES}"
         '''
       }
     }
