@@ -21,9 +21,9 @@ pipeline{
         echo "${BUNDLE_FILENAME}"
         echo "${BUNDLE_FILES}"
         echo "${TAR_PARAMS}"
-        //sh '''#!/bin/bash
-        //  tar "{TAR_PARAMS}"
-        //'''
+        sh '''#!/bin/bash
+          tar "{TAR_PARAMS}"
+        '''
       }
     }
   }
