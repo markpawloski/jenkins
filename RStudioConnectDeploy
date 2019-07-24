@@ -30,17 +30,17 @@ pipeline{
     stage("Create RConnect Content"){
       steps{
         sh '''#!/bin/bash
-          //retguid=$(curl --silent --show-error -L --max-redirs 0 --fail -X POST -H "Authorization: Key $CONNECT_API_KEY" --data "$DATA" "$CONNECT_SERVER/experimental/content")
-          //guid=$(<<< $retguid awk -F '"' '$2=="guid"{printf("%s", $4)}')
-          //echo $guid
+          #retguid=$(curl --silent --show-error -L --max-redirs 0 --fail -X POST -H "Authorization: Key $CONNECT_API_KEY" --data "$DATA" "$CONNECT_SERVER/experimental/content")
+          #guid=$(<<< $retguid awk -F '"' '$2=="guid"{printf("%s", $4)}')
+          #echo $guid
 
-          //retbundle=$(curl --silent --show-error -L --max-redirs 0 --fail -X POST -H "Authorization: Key $CONNECT_API_KEY" --data-binary @"bundle.tar.gz "$CONNECT_SERVER/experimental/content/$guid/upload")
-          //bundleid=$(<<< $retbundle awk -F '"' '$2=="bundle_id"{printf("%s", $4)}')
-          //echo $bundleid
+          #retbundle=$(curl --silent --show-error -L --max-redirs 0 --fail -X POST -H "Authorization: Key $CONNECT_API_KEY" --data-binary @"bundle.tar.gz "$CONNECT_SERVER/experimental/content/$guid/upload")
+          #bundleid=$(<<< $retbundle awk -F '"' '$2=="bundle_id"{printf("%s", $4)}')
+          #echo $bundleid
           
-          //rettask=$(curl --silent --show-error -L --max-redirs 0 --fail -X POST -H "Authorization: Key $CONNECT_API_KEY" --data "$guid" "$CONNECT_SERVER/experimental/content/$guid/deploy")
-          //taskid=$(<<< $rettask awk -F '"' '$2=="task_id"{printf("%s", $4)}')
-          //echo $taskid
+          #rettask=$(curl --silent --show-error -L --max-redirs 0 --fail -X POST -H "Authorization: Key $CONNECT_API_KEY" --data "$guid" "$CONNECT_SERVER/experimental/content/$guid/deploy")
+          #taskid=$(<<< $rettask awk -F '"' '$2=="task_id"{printf("%s", $4)}')
+          #echo $taskid
 
 
           url=$CONNECT_SERVER/employee/40688
