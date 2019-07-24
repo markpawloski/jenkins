@@ -22,7 +22,7 @@ pipeline{
         echo "${BUNDLE_FILES}"
         echo "${TAR_PARAMS}"
         sh '''#!/bin/bash
-          tar "{TAR_PARAMS}"
+          tar czf bundle.tar.gz "$BUNDLE_FILES"
         '''
       }
     }
