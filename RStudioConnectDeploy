@@ -10,7 +10,7 @@ pipeline{
         def BUNDLE_FILES = "manifest.json testmarkdown.Rmd"
         //this prepares JSON DATA for submission to RStudio Connect API
         def DATA = /'{"name":"${CONTENT_NAME}","title":"${CONTENT_TITLE}"}'/
-        def TAR_PARAMS = "czf bundle.tar.gz --files-from=${BUNDLE_FILES}"
+        //def TAR_PARAMS = "czf bundle.tar.gz --files-from=${BUNDLE_FILES}"
   }
   stages{
     stage("Build"){
@@ -20,7 +20,7 @@ pipeline{
         echo "${DATA}"
         echo "${BUNDLE_FILENAME}"
         echo "${BUNDLE_FILES}"
-        echo "${TAR_PARAMS}"
+        //echo "${TAR_PARAMS}"
         sh '''#!/bin/bash
           tar czf bundle.tar.gz "$BUNDLE_FILES"
         '''
