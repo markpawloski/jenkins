@@ -46,10 +46,9 @@ pipeline{
           url=$CONNECT_SERVER/employee/41353
           ret=$(curl $url)
           guid=$(<<< $ret awk -F '"' '$2=="id"{printf("%s", $4)}')
-          echo $guid
           if [ ! -z "$guid" ]
           then
-            echo "not found"
+            echo "Content not generated.  No GUID returned.  Check DATA element for proper JSON"
           else
             echo $guid
           fi
