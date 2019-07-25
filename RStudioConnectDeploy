@@ -47,7 +47,7 @@ pipeline{
           ret=$(curl $url)
           guid=$(<<< $ret awk -F '"' '$2=="id"{printf("%s", $4)}')
           echo $guid
-          if [ !-z "$guid" ]
+          if [ ! -z "$guid" ]
           then
             echo "not found"
           else
