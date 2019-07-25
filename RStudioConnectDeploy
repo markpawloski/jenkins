@@ -46,7 +46,7 @@ pipeline{
           url=$CONNECT_SERVER/employee/40688
           ret=$(curl $url)
           guid=$(<<< $ret awk -F '"' '$2=="id"{printf("%s", $4)}')
-          if[! -z "$guid"]
+          if[!-z "$guid"]
           then
             echo $guid
           else
