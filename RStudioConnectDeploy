@@ -43,7 +43,7 @@ pipeline{
           #echo $taskid
 
 
-          url=$CONNECT_SERVER/employee/40688
+          url=$CONNECT_SERVER/employee/41353
           ret=$(curl $url)
           guid=$(<<< $ret awk -F '"' '$2=="id"{printf("%s", $4)}')
           echo $guid
