@@ -47,9 +47,10 @@ pipeline{
           ret=$(curl $url)
           guid=$(<<< $ret awk -F '"' '$2=="id"{printf("%s", $4)}')
           if[! -z "$guid"]
-          echo $guid
-          esle
-          echo "not found"
+            echo $guid
+          else
+            echo "not found"
+          fi
         '''
       }
     }
