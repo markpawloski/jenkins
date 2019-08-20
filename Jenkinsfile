@@ -1,13 +1,17 @@
 pipeline{
   agent any
   environment{
-    def CONNECT_SERVER = "http://myconnectserver.pawloski.net/__api__/v1"
-    def CONNECT_API_KEY = "sdfjlkjdflkjsldkjslkdj"
+    def DEVELOPMENT_BRANCH = "development"
+    def PRODUCTION_BRANCH = "master"
+    def DEV_CONNECT_SERVER = "https://rstudioconnect-dev.bcbsfl.com/__api__/v1"
+    def PROD_CONNECT_SERVER = "https://rstudioconnect.bcbsfl.com/__api__/v1"
+    def CONNECT_SERVER = ""
+    def DEV_CONNECT_API_KEY = "devapikey"
+    def PROD_CONNECT_API_KEY = "prodapikey"
+    def CONNECT_API_KEY = ""
     def CONTENT_NAME = "Test Content Name"
     def CONTENT_TITLE = "Test Content Title"
     def ORIGINAL_GUID = ""
-    def DEV_BRANCH = "development"
-    def PROD_BRANCH = "master"
     def isProd = "false"
   }
   stages{
@@ -16,25 +20,36 @@ pipeline{
         echo "Workspace: ${WORKSPACE}"
       }
     }
+    stage("Check Development"){
+      when{expression{env.BRANCH_NAME == "${DEVELOPMENT_BRANCH}"}}
+      steps{
+        CONNECT_SERVER = DEV_CONNECT_SERVER
+        CONNECT_API_KEY = DEV_CONNECT_API_KEY
+        echo "Development"
+        echo CONNECT_SERVER
+      }
+    }
+    stage("Check Production"){
+      when{expression{env.BRANCH_NAME == "${PRODUCTION_BRANCH}"}}
+      steps{
+        CONNECT_SERVER = PROD_CONNECT_SERVER
+        CONNECT_API_KEY = PROD_CONNECT_API_KEY
+        isProd = true
+        echo "Production"
+        echo CONNECT_SERVER
+      }
+    }
+    stage("Check Prod Approval"){
+      when{expression{isProd == true}}
+      steps{
+        echo "Approval for branch: ${env.BRANCH_NAME}..."
+        echo "Check Remedy Status"
+      }
+    }
     stage("Create Connect Content"){
       steps{
         echo "Create Content"
       }
     }
-    stage("Deploy - Development"){
-      when{expression{env.BRANCH_NAME == "${DEV_BRANCH}"}}
-      steps{
-        echo "Development"
-      }
-    }
-    stage("Deploy - Production"){
-     when{expression{env.BRANCH_NAME == "${PROD_BRANCH}"}}
-      steps{
-        echo "Approval for Prod..."
-        timeout(time:3,unit:'MINUTES'){
-          input message: 'Deploy to Prod?'
-        }
-      }
-    }
-  }
+   }
 }
