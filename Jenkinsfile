@@ -5,10 +5,8 @@ pipeline{
     def PRODUCTION_BRANCH = "master"
     def DEV_CONNECT_SERVER = "https://rstudioconnect-dev.bcbsfl.com/__api__/v1"
     def PROD_CONNECT_SERVER = "https://rstudioconnect.bcbsfl.com/__api__/v1"
-    def CONNECT_SERVER = ""
     def DEV_CONNECT_API_KEY = "devapikey"
     def PROD_CONNECT_API_KEY = "prodapikey"
-    def CONNECT_API_KEY = ""
     def CONTENT_NAME = "Test Content Name"
     def CONTENT_TITLE = "Test Content Title"
     def ORIGINAL_GUID = ""
@@ -25,6 +23,8 @@ pipeline{
       steps{
         sh '''#!/bin/bash
            echo "Development"
+           CONNECT_SERVER = "${DEV_CONNECT_SERVER}"
+           echo $CONNECT_SERVER
         '''
       }
     }
