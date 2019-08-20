@@ -23,20 +23,24 @@ pipeline{
     stage("Check Development"){
       when{expression{env.BRANCH_NAME == "${DEVELOPMENT_BRANCH}"}}
       steps{
-        CONNECT_SERVER = ${DEV_CONNECT_SERVER}
-        CONNECT_API_KEY = ${DEV_CONNECT_API_KEY}
-        echo "Development"
-        echo ${CONNECT_SERVER}
+        script{
+          CONNECT_SERVER = ${DEV_CONNECT_SERVER}
+          CONNECT_API_KEY = ${DEV_CONNECT_API_KEY}
+          echo "Development"
+          echo ${CONNECT_SERVER}
+        }
       }
     }
     stage("Check Production"){
       when{expression{env.BRANCH_NAME == "${PRODUCTION_BRANCH}"}}
       steps{
-        CONNECT_SERVER = ${PROD_CONNECT_SERVER}
-        CONNECT_API_KEY = ${PROD_CONNECT_API_KEY}
-        isProd = true
-        echo "Production"
-        echo ${CONNECT_SERVER}
+        script{
+          CONNECT_SERVER = ${PROD_CONNECT_SERVER}
+          CONNECT_API_KEY = ${PROD_CONNECT_API_KEY}
+          isProd = true
+          echo "Production"
+          echo ${CONNECT_SERVER}
+        }
       }
     }
     stage("Check Prod Approval"){
