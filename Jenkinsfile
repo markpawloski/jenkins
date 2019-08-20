@@ -23,7 +23,7 @@ pipeline{
     stage("Check Development"){
       when{expression{env.BRANCH_NAME == "${DEVELOPMENT_BRANCH}"}}
       steps{
-        sh '''#!/binbash
+        sh '''#!/bin/bash
           #CONNECT_SERVER = "${DEV_CONNECT_SERVER}"
           #CONNECT_API_KEY = "${DEV_CONNECT_API_KEY}"
           echo "Development"
