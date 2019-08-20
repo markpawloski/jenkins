@@ -23,7 +23,7 @@ pipeline{
       steps{
         sh '''#!/bin/bash
            echo "Development"
-           CONNECT_SERVER = "${DEV_CONNECT_SERVER}"
+           CONNECT_SERVER="${DEV_CONNECT_SERVER}"
            echo $CONNECT_SERVER
         '''
       }
